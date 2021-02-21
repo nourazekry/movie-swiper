@@ -2,8 +2,11 @@ import React from 'react';
 import { NavigationStackOptions, NavigationStackScreenProps } from 'react-navigation-stack/lib/typescript/types';
 import { connect } from 'react-redux';
 
+import { routeNames } from '../routes/routeNames';
+import { getLibraryFavoriteIcon, getLibrarySettingsIcon, getLibraryWatchlistIcon } from '../helpers/icons';
 import AuthenticatedLock from '../components/AuthenticatedLock';
-import { StatusBarSpacer } from '../components/common';
+import { StatusBarSpacer, TouchableScale } from '../components/common';
+import NavigationService from '../routes/NavigationService';
 import GuestInfo from '../components/GuestInfo';
 import { withDelayedLoading } from '../components/hoc/withDelayedLoading';
 import ExploreMovieDeck from '../components/movie/ExploreMovieDeck';
@@ -17,11 +20,16 @@ type NavigationProps = NavigationStackScreenProps<OwnNavigationProps>;
 type ReduxProps = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 type Props = NavigationProps & ReduxProps;
 
+const navigateToSettings = () => {
+  NavigationService.navigate(routeNames.Settings);
+};
+
 /* ------------- Component ------------- */
 class Explore extends React.Component<Props> {
   static navigationOptions = ({ navigation }: NavigationProps): NavigationStackOptions => {
     const isAuthenticatedUser = navigation.getParam('isAuthenticatedUser');
-    return isAuthenticatedUser ? { header: null } : {};
+    return isAuthenticatedUser ? {  headerRight: <TouchableScale onPress={navigateToSettings}>{getLibrarySettingsIcon()}</TouchableScale>,
+    } : {};
   };
 
   componentDidMount() {
