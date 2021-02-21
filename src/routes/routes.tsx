@@ -48,10 +48,10 @@ const BottomTabs = createBottomTabNavigator(
       }),
     },
     [tabNames.explore]: {
-      screen: createDefaultStackNavigator({ [tabNames.explore]: ExploreScreen,
-       [routeNames.Settings]: SettingsScreen}),
-
-
+      screen: createDefaultStackNavigator({
+        [tabNames.explore]: ExploreScreen,
+        [routeNames.Settings]: SettingsScreen,
+      }),
     },
     [tabNames.library]: {
       screen: createDefaultStackNavigator({
