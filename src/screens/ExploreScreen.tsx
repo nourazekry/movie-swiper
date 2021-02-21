@@ -3,7 +3,7 @@ import { NavigationStackOptions, NavigationStackScreenProps } from 'react-naviga
 import { connect } from 'react-redux';
 
 import { routeNames } from '../routes/routeNames';
-import { getLibraryFavoriteIcon, getLibrarySettingsIcon, getLibraryWatchlistIcon } from '../helpers/icons';
+import { getLibrarySettingsIcon } from '../helpers/icons';
 import AuthenticatedLock from '../components/AuthenticatedLock';
 import { StatusBarSpacer, TouchableScale } from '../components/common';
 import NavigationService from '../routes/NavigationService';
@@ -28,8 +28,9 @@ const navigateToSettings = () => {
 class Explore extends React.Component<Props> {
   static navigationOptions = ({ navigation }: NavigationProps): NavigationStackOptions => {
     const isAuthenticatedUser = navigation.getParam('isAuthenticatedUser');
-    return isAuthenticatedUser ? {  headerRight: <TouchableScale onPress={navigateToSettings}>{getLibrarySettingsIcon()}</TouchableScale>,
-    } : {};
+    return isAuthenticatedUser ? {
+        headerRight: <TouchableScale onPress={navigateToSettings}>{getLibrarySettingsIcon()}</TouchableScale>,
+        } : {};
   };
 
   componentDidMount() {
